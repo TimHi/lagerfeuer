@@ -1,0 +1,11 @@
+<div class="container" *ngIf="data.length > 0">
+  <iframe
+    [src]="getSafeUrl()"
+    width="300"
+    height="380"
+    frameborder="0"
+    allowtransparency="true"
+    allow="encrypted-media"
+  ></iframe>
+  <app-text description="{{ data[index].Description }}"></app-text>
+</div>

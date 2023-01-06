@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --dark: #020122;
+    --light-red: #F4442E;
+    --grey: #636564;
+    --white: #FFF9FB;
+    --dark-red: #4F000B;
+}
+
+@font-face {
+    font-family: 'NationalPark';
+    src: url('assets/NationalPark-VariableVF.ttf') format('truetype');
+}
+
+html {
+    background-color: var(--dark);
+}

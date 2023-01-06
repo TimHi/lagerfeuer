@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.shadow {
+    filter: drop-shadow(0 0 0.5em var(--light-red));
+}
+
+.text {
+    color: var(--white);
+    font-family: 'NationalPark';
+    font-size: 24px;
+}
