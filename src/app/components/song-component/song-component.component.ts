@@ -22,7 +22,10 @@ export class SongComponentComponent implements OnInit {
       .get<SongModel[]>('/assets/MockData.json')
       .subscribe((data: SongModel[]) => {
         data.forEach((element) => {
-          element.SpotifyURL = element.SpotifyURL;
+          element.SpotifyURL = element.SpotifyURL.replace(
+            'track',
+            'embed/track'
+          );
         });
         this.data = data;
         this.currentUrl = data[0].SpotifyURL;
