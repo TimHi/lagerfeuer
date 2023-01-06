@@ -1,7 +1,9 @@
 <div class="container">
-  <ng-lottie
-    class="shadow"
-    [options]="options"
-    (animationCreated)="animationCreated($event)"
-  ></ng-lottie>
+  <a (click)="fetchNewSong()">
+    <ng-lottie
+      class="shadow"
+      [options]="options"
+      (animationCreated)="animationCreated($event)"
+    ></ng-lottie>
+  </a>
 </div>

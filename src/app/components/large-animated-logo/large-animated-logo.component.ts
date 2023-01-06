@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AnimationOptions } from 'ngx-lottie';
 import { AnimationItem } from 'ngx-lottie/lib/symbols';
+import { SongService } from 'src/app/services/song.service';
 
 @Component({
   selector: 'app-large-animated-logo',
@@ -9,8 +10,13 @@ import { AnimationItem } from 'ngx-lottie/lib/symbols';
 })
 export class LargeAnimatedLogoComponent {
   options: AnimationOptions = { path: '/assets/bonfire.json' };
+  constructor(private songService: SongService) {}
 
   animationCreated(animationItem: AnimationItem): void {
     console.log(animationItem);
+  }
+
+  fetchNewSong() {
+    this.songService.getSongsFromUser();
   }
 }

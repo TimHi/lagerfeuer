@@ -1,4 +1,4 @@
-<div class="container" *ngIf="data.length > 0">
+<div class="container" *ngIf="currentSong.description != ''">
   <iframe
     [src]="getSafeUrl()"
     width="300"
@@ -7,5 +7,5 @@
     allowtransparency="true"
     allow="encrypted-media"
   ></iframe>
-  <app-text description="{{ data[index].Description }}"></app-text>
+  <app-text description="{{ currentSong.description }}"></app-text>
 </div>
