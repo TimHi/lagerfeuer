@@ -1,4 +1,12 @@
+export interface Expand {}
+
 export interface SongModel {
-  SpotifyURL: string;
-  Description: string;
+  collectionId: string;
+  collectionName: string;
+  created: string;
+  description: string;
+  id: string;
+  spotifyurl: string;
+  updated: string;
+  expand: Expand;
 }
