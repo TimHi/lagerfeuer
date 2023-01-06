@@ -3,6 +3,7 @@ import { SongModel } from 'src/app/model/SongModel';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { UrlbypassPipe } from './UrlBypassPipe';
+import { SongService } from 'src/app/services/song.service';
 
 @Component({
   selector: 'app-song-component',
@@ -16,7 +17,11 @@ export class SongComponentComponent implements OnInit {
   urlSuffix: string = '?utm_source=generator&theme=0';
   urlPrefix: string = 'https://embed.';
   private urlbypassPipe: UrlbypassPipe;
-  constructor(private http: HttpClient, private sani: DomSanitizer) {
+  constructor(
+    private http: HttpClient,
+    private sani: DomSanitizer,
+    private songService: SongService
+  ) {
     this.urlbypassPipe = new UrlbypassPipe(sani);
     this.http
       .get<SongModel[]>('/assets/MockData.json')
@@ -31,10 +36,14 @@ export class SongComponentComponent implements OnInit {
         this.currentUrl = data[0].SpotifyURL;
       });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    (async () => {
+      const data = await this.songService.getSongsFromUser();
+      console.log(data);
+    })();
+  }
 
   getSafeUrl() {
-    console.log(this.currentUrl);
     return this.urlbypassPipe.transform(this.currentUrl);
   }
 }
