@@ -12,10 +12,6 @@ export class LargeAnimatedLogoComponent {
   options: AnimationOptions = { path: '/assets/bonfire.json' };
   constructor(private songService: SongService) {}
 
-  animationCreated(animationItem: AnimationItem): void {
-    console.log(animationItem);
-  }
-
   fetchNewSong() {
     this.songService.getSongsFromUser();
   }

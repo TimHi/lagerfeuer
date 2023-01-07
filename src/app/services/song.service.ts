@@ -23,7 +23,7 @@ export class SongService {
    * Get all the songs and push a random one to the pipe.
    */
   async getSongsFromUser() {
-    const pb = new PocketBase('http://0.0.0.0:8090');
+    const pb = new PocketBase('130.162.253.59:8090');
     const record = await pb.collection('songs').getFullList();
     let songs: SongModel[] = [];
     record.forEach((element) => {
