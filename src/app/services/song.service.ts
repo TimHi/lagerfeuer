@@ -23,21 +23,24 @@ export class SongService {
    * Get all the songs and push a random one to the pipe.
    */
   async getSongsFromUser() {
-    const pb = new PocketBase('https://mag.api.recipe:8090');
-    const record = await pb.collection('songs').getFullList();
-    let songs: SongModel[] = [];
-    record.forEach((element) => {
-      element['spotifyurl'] = element['spotifyurl'].replace(
-        'track',
-        'embed/track'
-      );
-      songs.push({
-        description: element['description'],
-        spotifyurl: element['spotifyurl'],
+    const pb = new PocketBase('http://localhost:8090');
+    try {
+      const record = await pb.collection('songs').getFullList();
+      let songs: SongModel[] = [];
+      record.forEach((element) => {
+        element['spotifyurl'] = element['spotifyurl'].replace(
+          'track',
+          'embed/track'
+        );
+        songs.push({
+          description: element['description'],
+          spotifyurl: element['spotifyurl'],
+        });
       });
-    });
-    this.pipeNextSong(this.getRandomObject(songs));
-    console.log(songs);
+      this.pipeNextSong(this.getRandomObject(songs));
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   /**
