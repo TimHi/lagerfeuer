@@ -24,13 +24,11 @@ export class CallbackComponent implements OnInit {
     let result: any;
     // parse the query parameters from the redirected url
     const params = this.route.snapshot.queryParamMap;
-    console.log('In Store:');
-    console.log(JSON.parse(this.storage.get('provider')));
+
     // load the previously stored provider's data
     const provider = JSON.parse(this.storage.get('provider'));
     // compare the redirect's state param and the stored provider's one
     if (provider.state !== params.get('state') || !params.has('code')) {
-      console.log('State mismatch or code missing');
       this.error = "State parameters don't match.";
       return;
     }

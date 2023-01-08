@@ -9,11 +9,16 @@ import { SongService } from 'src/app/services/song.service';
 })
 export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;
-
+  headerText: string;
   clientId: string | null = null;
 
   constructor(private songService: SongService, private route: ActivatedRoute) {
     this.clientId = this.route.snapshot.paramMap.get('id');
+    if (this.clientId === null) {
+      this.headerText = 'Your Lagerfeuer.';
+    } else {
+      this.headerText = 'Lagerfeuer.';
+    }
   }
   ngOnInit(): void {
     this.isLoggedIn = this.songService.authGuardOk();

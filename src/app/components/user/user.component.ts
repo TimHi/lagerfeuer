@@ -33,7 +33,6 @@ export class UserComponent {
           this.form.reset();
         });
     } catch (err: any) {
-      console.log('Error?');
       console.log(err);
       console.log(err.originalError);
     }

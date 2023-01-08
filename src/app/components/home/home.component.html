@@ -1,4 +1,4 @@
-<app-header text="Lagerfeuer."></app-header>
+<app-header text="{{ headerText }}"></app-header>
 <div *ngIf="isLoggedIn; else loggedOut">
   <div class="fContainer">
     <app-large-animated-logo [clientId]="clientId"></app-large-animated-logo>

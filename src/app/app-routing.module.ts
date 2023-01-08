@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'callback', component: CallbackComponent },
   { path: 'redirect', component: CallbackComponent },
   { path: 'loading', component: LoadingComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'add', component: UserComponent },
 ];
 
 @NgModule({

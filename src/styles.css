@@ -16,8 +16,15 @@ html {
   background-color: var(--dark);
 }
 
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+}
+
 input {
-  color: var(--light-red);
+  color: var(--white);
   background-color: var(--dark);
   font-family: "NationalPark";
   font-size: 24px;

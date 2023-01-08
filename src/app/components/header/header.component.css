@@ -1,15 +1,15 @@
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h1{
-    color: var(--white);
-    font-family: 'NationalPark';
-    font-size: 65px;
+h1 {
+  color: var(--white);
+  font-family: "NationalPark";
+  font-size: 65px;
 }
 
 .shadow {
-    filter: drop-shadow(0 0 1em var(--light-red));
+  filter: drop-shadow(0 0 4em var(--light-red));
 }

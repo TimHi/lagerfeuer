@@ -13,7 +13,6 @@ export class SongService {
   private pb: PocketBase = new PocketBase('http://127.0.0.1:8090');
 
   constructor(private router: Router) {
-    console.log('Song Service: ', this.authGuardOk());
     this.isLoggedInChange.next(this.authGuardOk());
   }
 
@@ -30,7 +29,6 @@ export class SongService {
   }
 
   authGuardOk(): boolean {
-    console.log('Is Auth Guard Valid?', this.pb.authStore.isValid);
     return this.pb.authStore.isValid;
   }
 
@@ -56,13 +54,12 @@ export class SongService {
    */
   async getSongsFromUser(clientId: string | null) {
     if (!this.authGuardOk()) {
-      console.log('Auth Guard not ok');
       this.handleAuthError();
       return;
     }
     try {
       let id;
-      if (clientId == null) {
+      if (clientId === null) {
         id = this.pb.authStore.model?.id;
       } else {
         id = clientId;
@@ -83,7 +80,6 @@ export class SongService {
         });
       });
       this.pipeNextSong(this.getRandomObject(songs));
-      console.log(record);
     } catch (err) {
       this.handleAuthError();
       console.log(err);

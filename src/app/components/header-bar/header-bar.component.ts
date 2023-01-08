@@ -10,7 +10,6 @@ export class HeaderBarComponent implements OnInit {
   isLoggedIn: boolean = false;
   constructor(private songService: SongService) {}
   ngOnInit(): void {
-    console.log('On Init');
     this.songService.isLoggedInChange.subscribe((value) => {
       this.isLoggedIn = value;
     });
