@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  frontend:
+    container_name: "frontend"
+    image: "lagerfeuer:latest"
+    networks:
+      - fireplace
+    ports:
+      - "3000:3000"
+
+  pocketbase:
+    hostname: pocketbase
+    container_name: "pocketbase"
+    image: docker.io/augustodelg/pocketbase:latest
+    restart: always
+    command:
+      - pocketbase
+      - serve
+      - --http
+      - 0.0.0.0:8090
+      - --dir
+      - /data
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./pocketbase:/data
+    networks:
+      - fireplace
+
+networks:
+  fireplace:

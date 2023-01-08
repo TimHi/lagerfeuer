@@ -5,7 +5,7 @@ src/assets/*
 /tmp
 /out-tsc
 /bazel-out
-
+pocketbase/
 # Node
 /node_modules
 npm-debug.log
