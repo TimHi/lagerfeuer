@@ -1,17 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --dark: #020122;
-    --light-red: #F4442E;
-    --grey: #636564;
-    --white: #FFF9FB;
-    --dark-red: #4F000B;
+  --dark: #020122;
+  --light-red: #f4442e;
+  --grey: #636564;
+  --white: #fff9fb;
+  --dark-red: #4f000b;
 }
 
 @font-face {
-    font-family: 'NationalPark';
-    src: url('assets/NationalPark-VariableVF.ttf') format('truetype');
+  font-family: "NationalPark";
+  src: url("assets/NationalPark-VariableVF.ttf") format("truetype");
 }
 
 html {
-    background-color: var(--dark);
+  background-color: var(--dark);
+}
+
+input {
+  color: var(--light-red);
+  background-color: var(--dark);
+  font-family: "NationalPark";
+  font-size: 24px;
+  filter: drop-shadow(0 0 0.2em var(--light-red));
+}
+
+button {
+  margin: 24px;
+  filter: drop-shadow(0 0 0.2em var(--light-red));
+  background-color: var(--dark-red);
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

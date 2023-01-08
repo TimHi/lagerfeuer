@@ -2,34 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LOCAL_STORAGE, WebStorageService } from 'ngx-webstorage-service';
 import PocketBase from 'pocketbase';
+import { SongService } from 'src/app/services/song.service';
 
 @Component({
   selector: 'app-login',
-  template: `
-    <div class="responsive">
-      <ng-container *ngIf="currentUser; else loading; else: authOptions">
-        <p>👨‍💻 Iglogt als {{ currentUser.username }}</p>
-      </ng-container>
-      <ng-template #loading>
-        <div
-          style="margin: 0 auto; display: block; width: 100px; margin-top: 200px;"
-        >
-          <a class="loader large"></a>
-        </div>
-      </ng-template>
-      <ng-template #authOptions>
-        <a href="{{ authUrl + redirectUri }}" class="responsive large-margin">
-          <button class="large medium-elevate responsive">
-            <img
-              class="responsive"
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            />
-            <span>Login</span>
-          </button>
-        </a>
-      </ng-template>
-    </div>
-  `,
+  templateUrl: './login.component.html',
   styles: [],
 })
 export class LoginComponent implements OnInit {
@@ -38,18 +15,27 @@ export class LoginComponent implements OnInit {
   redirectUri: string = '';
   name: string = '';
   authUrl: string = '';
+  isLoggedIn = false;
+
   constructor(
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
-    private router: Router
+    private songService: SongService
   ) {}
 
   ngOnInit(): void {
+    this.isLoggedIn = this.songService.authGuardOk();
+    this.songService.isLoggedInChange.subscribe((value) => {
+      this.isLoggedIn = value;
+    });
     this.getAuth();
   }
 
+  /**
+   * Fetch the available Auth Methods from the Backend and fill in the data.
+   * Only Spotify is used but there is still the foreach cause why not?
+   */
   async getAuth() {
-    const pb = new PocketBase('http://127.0.0.1:8090');
-    const authMethods = await pb.collection('users').listAuthMethods();
+    const authMethods = await this.songService.getAuthMethods();
     authMethods.authProviders.forEach((prov) => {
       this.authUrl = prov.authUrl;
       this.name = prov.name;

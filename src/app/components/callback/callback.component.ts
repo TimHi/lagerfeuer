@@ -2,17 +2,11 @@ import PocketBase from 'pocketbase';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LOCAL_STORAGE, WebStorageService } from 'ngx-webstorage-service';
+import { SongService } from 'src/app/services/song.service';
 
 @Component({
   selector: 'app-oauth-callback',
-  template: `
-    <ng-container *ngIf="error; else loading">
-      {{ error }}
-    </ng-container>
-    <ng-template #loading>
-      <h3>👀Grad no chli am lade</h3>
-    </ng-template>
-  `,
+  templateUrl: './callback.component.html',
   styles: [],
 })
 export class CallbackComponent implements OnInit {
@@ -22,7 +16,8 @@ export class CallbackComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    @Inject(LOCAL_STORAGE) private storage: WebStorageService
+    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    private songService: SongService
   ) {}
 
   ngOnInit(): void {
@@ -53,19 +48,11 @@ export class CallbackComponent implements OnInit {
         }
       )
       .then((authData: any) => {
-        console.log('Auth result');
-        console.log(authData);
         result = authData;
         this.username = authData?.record?.username;
-        console.log('Then');
-        console.log(this.username);
+        this.songService.setLoggedInStatus();
         if (this.username) {
-          if (this.username.startsWith('users')) {
-            console.log(pb.authStore.token);
-            this.router.navigate(['/user']);
-          } else {
-            this.router.navigate(['/']);
-          }
+          this.router.navigate(['/']);
         }
       })
       .catch((err: any) => {

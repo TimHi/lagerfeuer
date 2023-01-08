@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import PocketBase from 'pocketbase';
 import { Subject } from 'rxjs';
 import { SongModel } from '../model/SongModel';
@@ -8,8 +9,17 @@ import { SongModel } from '../model/SongModel';
 })
 export class SongService {
   currentSongChange: Subject<SongModel> = new Subject<SongModel>();
-  currentSong: SongModel = new SongModel();
-  constructor() {}
+  isLoggedInChange: Subject<boolean> = new Subject<boolean>();
+  private pb: PocketBase = new PocketBase('http://127.0.0.1:8090');
+
+  constructor(private router: Router) {
+    console.log('Song Service: ', this.authGuardOk());
+    this.isLoggedInChange.next(this.authGuardOk());
+  }
+
+  setLoggedInStatus() {
+    this.isLoggedInChange.next(this.authGuardOk());
+  }
 
   /**
    * Pipe a new song to the Subject
@@ -19,13 +29,48 @@ export class SongService {
     this.currentSongChange.next(song);
   }
 
+  authGuardOk(): boolean {
+    console.log('Is Auth Guard Valid?', this.pb.authStore.isValid);
+    return this.pb.authStore.isValid;
+  }
+
+  handleAuthError() {
+    this.pb.authStore.clear();
+    this.isLoggedInChange.next(this.pb.authStore.isValid);
+    this.router.navigate(['/']);
+  }
+
+  logout() {
+    this.pb.authStore.clear();
+    this.isLoggedInChange.next(this.pb.authStore.isValid);
+    this.router.navigate(['/']);
+  }
+
+  async getAuthMethods() {
+    return await this.pb.collection('users').listAuthMethods();
+  }
+
   /**
    * Get all the songs and push a random one to the pipe.
+   * TODO: Fetch one random?
    */
-  async getSongsFromUser() {
-    const pb = new PocketBase('http://127.0.0.1:8090');
+  async getSongsFromUser(clientId: string | null) {
+    if (!this.authGuardOk()) {
+      console.log('Auth Guard not ok');
+      this.handleAuthError();
+      return;
+    }
     try {
-      const record = await pb.collection('songs').getFullList();
+      let id;
+      if (clientId == null) {
+        id = this.pb.authStore.model?.id;
+      } else {
+        id = clientId;
+      }
+      const record = await this.pb.collection('songs').getFullList(100000, {
+        filter: `user.id='${id}'`,
+      });
+
       let songs: SongModel[] = [];
       record.forEach((element) => {
         element['spotifyurl'] = element['spotifyurl'].replace(
@@ -38,7 +83,9 @@ export class SongService {
         });
       });
       this.pipeNextSong(this.getRandomObject(songs));
+      console.log(record);
     } catch (err) {
+      this.handleAuthError();
       console.log(err);
     }
   }

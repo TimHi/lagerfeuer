@@ -1,1 +1,11 @@
-<p>login works!</p>
+<div *ngIf="!isLoggedIn">
+  <a href="{{ authUrl + redirectUri }}" class="responsive large-margin">
+    <div class="login">
+      <img
+        width="50"
+        src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
+      />
+      <app-text description="Login"></app-text>
+    </div>
+  </a>
+</div>

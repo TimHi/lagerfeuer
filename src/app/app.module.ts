@@ -12,9 +12,13 @@ import { TextComponent } from './components/text/text.component';
 import { SongComponentComponent } from './components/song-component/song-component.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { LoginComponent } from './components/login/login.component';
-import { StorageServiceModule } from 'ngx-webstorage-service';
 import { LoadingComponent } from './components/loading/loading.component';
 import { UserComponent } from './components/user/user.component';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderBarComponent } from './components/header-bar/header-bar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FeatureListComponent } from './components/feature-list/feature-list.component';
+import { LoggedoutFireAnimationComponent } from './components/loggedout-fire-animation/loggedout-fire-animation.component';
 
 // Note we need a separate function as it's required
 // by the AOT compiler.
@@ -33,12 +37,17 @@ export function playerFactory() {
     LoginComponent,
     LoadingComponent,
     UserComponent,
+    HomeComponent,
+    HeaderBarComponent,
+    FeatureListComponent,
+    LoggedoutFireAnimationComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StorageServiceModule,
+    FormsModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [],

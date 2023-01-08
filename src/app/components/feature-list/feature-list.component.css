@@ -1,0 +1,10 @@
+li {
+  color: var(--white);
+  font-family: "NationalPark";
+  font-size: 18px;
+  margin: 45px;
+}
+
+.shadow {
+  filter: drop-shadow(0 0 1em var(--light-red));
+}

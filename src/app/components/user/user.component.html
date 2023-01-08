@@ -1,4 +1,22 @@
-<div>
-  <a (click)="post()"><app-header text="POST"></app-header></a>
-  <a (click)="read()"><app-header text="READ"></app-header></a>
+<div class="container">
+  <app-header text="Upload a new Song:"></app-header>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label for="SpotifyURL"
+      ><app-text description="Spotify URL:"></app-text>></label
+    >
+    <input type="text" formControlName="SpotifyURL" required />
+    <br />
+    <label for="SpotifyURL"
+      ><app-text description="Description:"></app-text>></label
+    >
+    <input type="text" formControlName="Description" />
+    <br />
+    <div class="container">
+      <button class="button" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+<div class="container">
+  <app-text description="Share your Songs:"></app-text>
+  <app-text description="{{ share }}"></app-text>
 </div>

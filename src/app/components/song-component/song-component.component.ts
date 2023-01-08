@@ -1,4 +1,4 @@
-import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Component, Input, OnInit, SecurityContext } from '@angular/core';
 import { SongModel } from 'src/app/model/SongModel';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -18,6 +18,7 @@ export class SongComponentComponent implements OnInit {
   urlPrefix: string = 'https://embed.';
   private urlbypassPipe: UrlbypassPipe;
   currentSong: SongModel = new SongModel();
+
   constructor(
     private http: HttpClient,
     private sani: DomSanitizer,

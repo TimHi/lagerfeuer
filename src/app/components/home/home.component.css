@@ -1,0 +1,21 @@
+.fContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.cContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+app-text {
+  width: 100%;
+  padding-top: 6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,7 @@
+<div *ngIf="isLoggedIn" class="bar">
+  <a class="marg-right" href="/"><app-text description="Home"></app-text></a>
+  <a class="marg-right" href="user"><app-text description="User"></app-text></a>
+  <a class="marg-right" (click)="logout()"
+    ><app-text description="Logout"></app-text
+  ></a>
+</div>

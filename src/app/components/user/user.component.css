@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.shadow {
+  filter: drop-shadow(0 0 1em var(--light-red));
+}
