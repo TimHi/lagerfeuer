@@ -53,10 +53,6 @@ export class SongService {
    * TODO: Fetch one random?
    */
   async getSongsFromUser(clientId: string | null) {
-    if (!this.authGuardOk()) {
-      this.handleAuthError();
-      return;
-    }
     try {
       let id;
       if (clientId === null) {

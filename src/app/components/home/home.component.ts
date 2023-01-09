@@ -12,9 +12,16 @@ export class HomeComponent implements OnInit {
   headerText: string;
   clientId: string | null = null;
 
-  constructor(private songService: SongService, private route: ActivatedRoute) {
+  constructor(
+    private songService: SongService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.clientId = this.route.snapshot.paramMap.get('id');
     if (this.clientId === null) {
+      if (!this.songService.authGuardOk()) {
+        this.router.navigate(['/']);
+      }
       this.headerText = 'Your Lagerfeuer.';
     } else {
       this.headerText = 'Lagerfeuer.';

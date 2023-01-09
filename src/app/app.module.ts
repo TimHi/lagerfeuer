@@ -19,6 +19,7 @@ import { HeaderBarComponent } from './components/header-bar/header-bar.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeatureListComponent } from './components/feature-list/feature-list.component';
 import { LoggedoutFireAnimationComponent } from './components/loggedout-fire-animation/loggedout-fire-animation.component';
+import { StartScreenComponent } from './components/start-screen/start-screen.component';
 
 // Note we need a separate function as it's required
 // by the AOT compiler.
@@ -41,6 +42,7 @@ export function playerFactory() {
     HeaderBarComponent,
     FeatureListComponent,
     LoggedoutFireAnimationComponent,
+    StartScreenComponent,
   ],
   imports: [
     ReactiveFormsModule,

@@ -1,14 +1,8 @@
 <app-header text="{{ headerText }}"></app-header>
-<div *ngIf="isLoggedIn; else loggedOut">
+<div>
   <div class="fContainer">
     <app-large-animated-logo [clientId]="clientId"></app-large-animated-logo>
     <app-song-component></app-song-component>
   </div>
   <app-text description="Tap the fire to explore more."></app-text>
 </div>
-<ng-template #loggedOut>
-  <div class="cContainer">
-    <app-login></app-login>
-    <app-feature-list></app-feature-list>
-  </div>
-</ng-template>

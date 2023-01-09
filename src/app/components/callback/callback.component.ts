@@ -50,7 +50,7 @@ export class CallbackComponent implements OnInit {
         this.username = authData?.record?.username;
         this.songService.setLoggedInStatus();
         if (this.username) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/client']);
         }
       })
       .catch((err: any) => {
