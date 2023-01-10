@@ -15,7 +15,7 @@ export class UserComponent {
       SpotifyURL: ['', Validators.required],
       Description: ['', []],
     });
-    this.share = 'http://localhost:4200/client/' + this.pb.authStore.model?.id;
+    this.share = 'https://mag.recipes/client/' + this.pb.authStore.model?.id;
   }
 
   async onSubmit() {
