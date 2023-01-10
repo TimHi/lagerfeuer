@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LOCAL_STORAGE, WebStorageService } from 'ngx-webstorage-service';
 import PocketBase from 'pocketbase';
 import { SongService } from 'src/app/services/song.service';
+import { environment } from 'src/enviroment/environment';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,6 @@ export class LoginComponent implements OnInit {
   currentUser: any;
   authMethods: any;
   redirectUri: string = '';
-  name: string = '';
   authUrl: string = '';
   isLoggedIn = false;
 
@@ -38,11 +38,10 @@ export class LoginComponent implements OnInit {
     const authMethods = await this.songService.getAuthMethods();
     authMethods.authProviders.forEach((prov) => {
       this.authUrl = prov.authUrl;
-      this.name = prov.name;
       this.storage.remove('provider');
       this.storage.set('provider', JSON.stringify(prov));
     });
     this.authMethods = authMethods;
-    this.redirectUri = 'http://localhost:4200/redirect';
+    this.redirectUri = environment.redirectUrl;
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import PocketBase from 'pocketbase';
 import { Subject } from 'rxjs';
+import { environment } from 'src/enviroment/environment';
 import { SongModel } from '../model/SongModel';
 
 @Injectable({
@@ -10,7 +11,7 @@ import { SongModel } from '../model/SongModel';
 export class SongService {
   currentSongChange: Subject<SongModel> = new Subject<SongModel>();
   isLoggedInChange: Subject<boolean> = new Subject<boolean>();
-  private pb: PocketBase = new PocketBase('http://127.0.0.1:8090');
+  private pb: PocketBase = new PocketBase(environment.backendUrl);
 
   constructor(private router: Router) {
     this.isLoggedInChange.next(this.authGuardOk());
@@ -32,10 +33,10 @@ export class SongService {
     return this.pb.authStore.isValid;
   }
 
-  handleAuthError() {
-    this.pb.authStore.clear();
-    this.isLoggedInChange.next(this.pb.authStore.isValid);
-    this.router.navigate(['/']);
+  handleAuthError(err: any) {
+    //TODO: Display Toast
+    console.log(err);
+    this.logout();
   }
 
   logout() {
@@ -44,6 +45,37 @@ export class SongService {
     this.router.navigate(['/']);
   }
 
+  async authenticateUser(provider: any, code: string) {
+    let result: any;
+    // authenticate
+    this.pb
+      .collection('users')
+      .authWithOAuth2(
+        provider.name,
+        code,
+        provider.codeVerifier,
+        environment.redirectUrl,
+        {
+          emailVisibility: false,
+        }
+      )
+      .then((authData: any) => {
+        result = authData;
+        const username = authData?.record?.username;
+        this.setLoggedInStatus();
+        if (username !== undefined && username !== null) {
+          this.router.navigate(['/client']);
+        }
+      })
+      .catch((err: any) => {
+        this.handleAuthError(err);
+      });
+  }
+
+  /**
+   * List the available auth methods
+   * @returns Oauth2 Authmethods from the Pocketbase Backend
+   */
   async getAuthMethods() {
     return await this.pb.collection('users').listAuthMethods();
   }
@@ -76,9 +108,8 @@ export class SongService {
         });
       });
       this.pipeNextSong(this.getRandomObject(songs));
-    } catch (err) {
-      this.handleAuthError();
-      console.log(err);
+    } catch (err: any) {
+      this.handleAuthError(err);
     }
   }
 
