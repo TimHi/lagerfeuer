@@ -9,7 +9,7 @@ import PocketBase from 'pocketbase';
 export class UserComponent {
   form: FormGroup;
   share: string;
-  private pb = new PocketBase('https://timhi.xyz');
+  private pb = new PocketBase('https://pocketbase.mag.recipes');
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       SpotifyURL: ['', Validators.required],
