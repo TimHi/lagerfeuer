@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import PocketBase from 'pocketbase';
 import { Subject } from 'rxjs';
-import { environment } from 'src/enviroment/environment';
+import { environment } from 'src/enviroments/environment';
 import { SongModel } from '../model/SongModel';
 
 @Injectable({
