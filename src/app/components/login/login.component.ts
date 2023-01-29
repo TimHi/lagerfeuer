@@ -1,7 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { LOCAL_STORAGE, WebStorageService } from 'ngx-webstorage-service';
-import PocketBase from 'pocketbase';
 import { SongService } from 'src/app/services/song.service';
 import { environment } from 'src/enviroments/environment';
 

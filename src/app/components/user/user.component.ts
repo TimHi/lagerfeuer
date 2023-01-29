@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import PocketBase from 'pocketbase';
+import { environment } from 'src/enviroments/environment';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -9,13 +10,14 @@ import PocketBase from 'pocketbase';
 export class UserComponent {
   form: FormGroup;
   share: string;
-  private pb = new PocketBase('https://pocketbase.mag.recipes');
+  private pb = new PocketBase(environment.backendUrl);
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       SpotifyURL: ['', Validators.required],
       Description: ['', []],
     });
-    this.share = 'https://mag.recipes/client/' + this.pb.authStore.model?.id;
+    this.share =
+      environment.backendUrl + '/client/' + this.pb.authStore.model?.id;
   }
 
   async onSubmit() {
