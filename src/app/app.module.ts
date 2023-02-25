@@ -20,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeatureListComponent } from './components/feature-list/feature-list.component';
 import { LoggedoutFireAnimationComponent } from './components/loggedout-fire-animation/loggedout-fire-animation.component';
 import { StartScreenComponent } from './components/start-screen/start-screen.component';
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Note we need a separate function as it's required
 // by the AOT compiler.
 export function playerFactory() {
@@ -47,6 +48,8 @@ export function playerFactory() {
   imports: [
     ReactiveFormsModule,
     BrowserModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

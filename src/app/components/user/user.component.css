@@ -8,3 +8,11 @@
 .shadow {
   filter: drop-shadow(0 0 1em var(--light-red));
 }
+.yellow {
+  filter: drop-shadow(0 0 1em var(--warning-yellow));
+  background-color: var(--warning-yellow);
+}
+
+.red {
+  background-color: var(--error-red);
+}

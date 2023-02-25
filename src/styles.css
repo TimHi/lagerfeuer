@@ -1,10 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~/node_modules/ngx-toastr/toastr.css";
+
 :root {
   --dark: #020122;
   --light-red: #f4442e;
   --grey: #636564;
   --white: #fff9fb;
   --dark-red: #4f000b;
+
+  --warning-yellow: #ffd900;
+  --error-red: #c9001b;
 }
 
 @font-face {
@@ -23,12 +28,14 @@ a:active {
   color: inherit;
 }
 
-input {
+input,
+textarea {
   color: var(--white);
   background-color: var(--dark);
   font-family: "NationalPark";
   font-size: 24px;
   filter: drop-shadow(0 0 0.2em var(--light-red));
+  resize: none;
 }
 
 button {

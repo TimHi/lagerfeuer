@@ -4,12 +4,22 @@
     <label for="SpotifyURL"
       ><app-text description="Spotify URL:"></app-text>></label
     >
-    <input type="text" formControlName="SpotifyURL" required />
+    <input type="text" formControlName="SpotifyURL" required="true" />
     <br />
     <label for="SpotifyURL"
       ><app-text description="Description:"></app-text>></label
     >
-    <input type="text" formControlName="Description" />
+    <textarea
+      formControlName="Description"
+      aria-multiline="true"
+      required="true"
+      maxlength="200"
+      ng-class="{
+        yellow: Description.value.length > 175,
+        red: Description.value.length > 200
+      }"
+      style="height: 250px"
+    ></textarea>
     <br />
     <div class="container">
       <button class="button" type="submit">Submit</button>
